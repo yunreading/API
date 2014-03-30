@@ -1,0 +1,39 @@
+AddType text/cache-manifest .appcache
+
+
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} !^www\.yunreading\.com$ [NC]
+RewriteRule ^(.*)$ http://www.yunreading.com/$1 [R,L]
+
+RewriteRule ^book/([^/]+)/?$ api/book_api.php?b_id=$1 [QSA,L]
+RewriteRule ^book/([^/]+)/cover/?$ api/book_api.php?b_id=$1&cover=1 [QSA,L]
+RewriteRule ^book/([^/]+)/title/?$ api/book_api.php?b_id=$1&title=1 [QSA,L]
+RewriteRule ^book$ api/book_api.php [QSA,L]
+RewriteRule ^book/([^/]+)/chapter/([^/]+)/?$  api/book_api.php?b_id=$1&c_id=$2 [QSA,L]
+RewriteRule ^book/([^/]+)/chapter/([^/]+)/([^/]+)/?$  api/book_api.php?b_id=$1&c_id=$2&num=$3[QSA,L]
+RewriteRule ^detail/([^/]+)/?$ V0.3/detail.php?b_id=$1 [QSA,L]
+
+
+RewriteRule ^user/([^/]+)/?$ api/user_api.php?u_id=$1 [QSA,L]
+RewriteRule ^user/([^/]+)/setting/?$ api/user_api.php?u_id=$1&setting=1[QSA,L]
+RewriteRule ^user$ api/user_api.php [QSA,L]
+RewriteRule ^user/([^/]+)/book/([^/]+)/?$  api/user_api.php?u_id=$1&b_id=$2 [QSA,L]
+
+RewriteRule ^user/([^/]+)/book/([^/]+)/bookmark/([^/]+)/?$  api/bookmark_api.php?u_id=$1&b_id=$2&bm_id=$3[QSA,L]
+RewriteRule ^user/([^/]+)/book/([^/]+)/bookmark$  api/bookmark_api.php?u_id=$1&b_id=$2[QSA,L]
+RewriteRule ^bookmark$  api/bookmark_api.php[QSA,L]
+RewriteRule ^bookmark/([^/]+)/?$ api/bookmark_api.php?bm_id=$1 [QSA,L]
+
+RewriteRule ^search/([^/]+)/?$  api/search_api.php?content=$1 [QSA,L]
+RewriteRule ^popular/book/?$  api/popular_api.php?criteria=book [QSA,L]
+RewriteRule ^popular/newest/?$  api/popular_api.php?criteria=newest [QSA,L]
+RewriteRule ^popular/page/([^/]+)/?$  api/popular_api.php?criteria=page&p_id=$1[QSA,L]
+RewriteRule ^category/([^/]+)/?$  api/category_api.php?tag=$1 [QSA,L]
+
+RewriteRule ^sync/settings/?$  api/sync_api.php?synctype=settings [QSA,L]
+RewriteRule ^sync/history/?$  api/sync_api.php?synctype=history [QSA,L]
+RewriteRule ^sync/bookmark/?$  api/sync_api.php?synctype=bookmark [QSA,L]
+
+RewriteRule ^comment/([^/]+)/?$ api/comment_api.php?b_id=$1 [QSA,L]
+RewriteRule ^book/([^/]+)/image/?$ api/image_api.php?b_id=$1&path=$2 [QSA,L]
